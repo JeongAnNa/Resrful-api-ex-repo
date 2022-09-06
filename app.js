@@ -70,7 +70,49 @@ app.get("/api/users/:user_id", (req, res) => {
     res.json({ok: true, user: user})
 })
 
+/**
+ * @path {POST} http://localhost:3000/api/users/add
+ * @description POST Method
+ * Add user data raw
+ */
+app.post("/api/users/add", (req, res) => {
+    const { id, name } = req.body;
+    const user = users.concat({id, name});
 
+    res.json({ok: true, users: user});
+});
+
+/**
+ * @path {PUT} http://localhost:3000/api/users/update
+ * @description PUT Method
+ * Modify data
+ */
+app.put("/api/users/update", (req, res) => {
+    const { id, name } = req.body;
+
+    // map function is Array func in JS
+    const user = users.map(data => {
+        if(data.id == id) data.name = name
+        return {
+            id: data.id,
+            name: data.name
+        };
+    });
+    res.json({ok: true, users: user});
+});
+
+/**
+ * @path {DELETE} http://localhost:3000/api/user/delete
+ * @description DELETE Method
+ * Delete data
+ */
+app.delete("/api/users/delete", (req, res) => {
+    const user_id = req.query.user_id;
+    console.log(user_id);
+    const user = users.filter(data => data.id != user_id)
+
+    res.json({ok: true, users: user,});
+});
 
 
 app.listen(port, () => console.log("Listen on " + port + " Port!!"));

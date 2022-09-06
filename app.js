@@ -14,12 +14,21 @@ const users = [
 ];
 const port = 3000;
 
+/**
+ * Request Data: N, Response Date: N
+ * @path {GET} http://localhost:3000/
+ * @description GET Method
+ */
 app.get('/', (req, res) => {
     res.send("Hello, Restful API Example Page!");
 });
 
-// Request Data: N, Response Date: Y
-app.get('/api/users', (req, res) => {
+/**
+ * Request Data: N, Response Date: Y
+ * @path {GET} http://localhost:3000/api/users
+ * @description GET Method
+ */
+ app.get('/api/users', (req, res) => {
     // Retuen User data
     res.json({ok: true, users: users});
 });
@@ -27,6 +36,7 @@ app.get('/api/users', (req, res) => {
 /**
  * Request Data: Y, Response Date: Y
  * @path {GET} http://localhost:3000/api/users/user?id=1
+ * @description GET Method
  */
 app.get("/api/users/user", (req, res) => {
     const user_id = req.query.id;
@@ -38,6 +48,7 @@ app.get("/api/users/user", (req, res) => {
 /**
  * Request Data: Y, Response Date: Y
  * @path {GET} http://localhost:3000/api/users/user-body
+ * @description GET Method
  */
 app.get("/api/users/user-body", (req, res) => {
     const user_id = req.body.id;
@@ -49,6 +60,7 @@ app.get("/api/users/user-body", (req, res) => {
 /**
  * Request Data: Y, Response Date: Y
  * @path {GET} http://localhost:3000/api/users/:user_id
+ * @description GET Method
  * :user_id == variable
  */
 app.get("/api/users/:user_id", (req, res) => {
@@ -57,6 +69,8 @@ app.get("/api/users/:user_id", (req, res) => {
 
     res.json({ok: true, user: user})
 })
+
+
 
 
 app.listen(port, () => console.log("Listen on " + port + " Port!!"));
